@@ -114,6 +114,15 @@ void Tetris::Init(GameController& controller)
 		};
 	controller.AddInputActionForKey(MoveDown);
 
+	//INIT ALL mGridBoard[10][20] TO FALSE (NONE HAVE A BLOCK IN THEM)
+	for( uint32_t col = 0; col < 10; ++col )
+	{
+		for( uint32_t row = 0; row < 20; ++row )
+		{
+			mGridBoard[col][row] = false;
+		}
+	}
+
 	//MAKE FIRST TETROMINO BLOCK..
 	MINO_TYPE minoType = static_cast<MINO_TYPE>(1);
 	Mino mino;
@@ -170,6 +179,89 @@ void Tetris::Update(uint32_t dt)
 					}
 				}
 
+			}
+			//EACH UPDATE CYCLE CHECK FOR COMPLETED ROWS + POINTS
+
+			//RESET MGRIDBOARD TO FALSE
+			for( uint32_t i = 0; i < 20; ++i )
+			{
+				for( uint32_t j = 0; j < 10; ++j )
+				{
+					mGridBoard[j][i] = false;
+				}
+			}
+
+			//THEN SET ALL LOCKED BLOCKS TO TRUE IN MGRIDBOARD
+			for( uint32_t i = 0; i < mMinos.size(); ++i )
+			{
+				if( mMinos[i].IsLocked() )//ONLY LOCKED BLOCKS CAN COMPLETE A ROW
+				{
+					for( uint32_t j = 0; j < mMinos[i].mBlocks.size(); ++j )
+					{
+						uint32_t xBlock = (mMinos[i].GetBlock(j).GetTopLeftPoint().GetX() - 2) / 22;//HARDCODED
+						uint32_t yBlock = (mMinos[i].GetBlock(j).GetTopLeftPoint().GetY() - 4) / 14;//   NEED CONSTS FOR 12x14 pixel blocks
+
+						std::cout << "xBLock : " << xBlock << "yBlock : " << yBlock << std::endl;
+
+						mGridBoard[xBlock][yBlock] = true;
+					}
+				}
+			}
+
+			//GO THROUGH EA ROW AND LOOK FOR COMPLETED ROWS
+			std::vector<uint32_t> clearedRows;
+
+			for( uint32_t row = 0; row < 20; ++row )
+			{
+				uint32_t checkRow = 0;
+
+				for( uint32_t col = 0; col < 10; ++col )
+				{
+					if( mGridBoard[col][row] == true )
+					{
+						++checkRow;
+						std::cout << "[]";
+					}
+					else
+					{
+						std::cout << "  ";
+					}
+				}
+				std::cout << "\n";
+				if( checkRow == 10 )
+				{
+					clearedRows.push_back( row );
+				}
+			}
+
+			//CLEAR THE COMPLETED ROWS AND ADD THE CORRECT AMOUNT OF POINTS (MULTIPLIER)
+			std::cout << "COMPLETED ROWS: " << clearedRows.size() << std::endl;
+			std::cout << "COMPLETED ROWS: " << clearedRows.size() << std::endl;
+
+			for( uint32_t clearedRow = 0; clearedRow < clearedRows.size(); ++clearedRow )
+			{
+				//GO THROUGH EACH BLOCK AND ERASE FROM TETROMINOS
+				for( uint32_t mino = 0; mino < mMinos.size(); ++mino )
+				{
+					if( mMinos[mino].IsLocked() )//ONLY REMOVE LOCKED TETROMINO BLOCKS
+					{
+						std::vector<uint32_t> blocksToDelete;//YOU HAVE TO DO THIS BECAUSE INDEX IS SHIFTED WHEN YOU DELETE A BLOCK
+
+						for( uint32_t block = 0; block < mMinos[mino].mBlocks.size(); block++ )
+						{
+							std::cout << "BLOCKS.SIZE() = " << block << std::endl;
+							//CHECK BLOCK Y VALS AGAINST CLEARED ROWS (Y VALS)
+							if( (mMinos[mino].mBlocks[block].GetTopLeftPoint().GetY() - 4) / 14 == clearedRows[clearedRow])
+							{
+								blocksToDelete.insert(blocksToDelete.begin() + 0, block);//INSERT AT BEGINING SO YOU CAN DELETE IN REVERSE ORDER
+							}
+						}
+						for( uint32_t deleteBlock = 0; deleteBlock < blocksToDelete.size(); ++deleteBlock )
+						{
+							mMinos[mino].mBlocks.erase(mMinos[mino].mBlocks.begin() + blocksToDelete[deleteBlock] );
+						}
+					}
+				}
 			}
 		}
 

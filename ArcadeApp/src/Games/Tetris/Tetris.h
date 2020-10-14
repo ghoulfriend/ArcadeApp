@@ -28,6 +28,8 @@ public:
 
 	inline Mino& GetMino(uint32_t index) {return mMinos[index];}
 	inline TetrisLevelBoundary GetLevelBoundary() {return mLevelBoundary;}
+
+	bool mGridBoard[10][20];
 private:
 
 	TetrisLevelBoundary mLevelBoundary;

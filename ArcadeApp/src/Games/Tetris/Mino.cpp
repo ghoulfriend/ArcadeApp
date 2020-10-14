@@ -548,7 +548,7 @@ void Mino::Rotate(MINO_TYPE minoType, std::vector<Mino> minos)
 	//IF THE ROTATION COLLIDES WITH ANY BLOCK IN THE GAME DO NOT UPDATE
 	for( uint32_t i = 0; i < minos.size() - 1; ++i )//CHECK FOR COLLISION AGAINST EVERY MINO
 	{
-		for( uint32_t j = 0; j < 4; ++j )//EVERY BLOCK OF EVERY MINO
+		for( uint32_t j = 0; j < minos[i].mBlocks.size(); ++j )//EVERY BLOCK OF EVERY MINO
 		{
 			for( uint32_t k = 0; k < 4; ++k)//EVERY ROTATED RESULT BLOCK
 			{

@@ -81,8 +81,9 @@ public:
 
 	inline void IncrementRotState(uint32_t increment) {mRotState++;}
 	inline uint32_t GetRotState() {return mRotState;}
-private:
+
 	std::vector<AARectangle> mBlocks;
+private:
 	uint32_t mCenterBlock;
 	Color mColor;
 	bool mLocked;
