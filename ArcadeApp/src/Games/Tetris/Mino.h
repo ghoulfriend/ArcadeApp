@@ -46,7 +46,7 @@ class Mino : public ICollidable
 {
 public:
 	Mino();
-	//Mino(std::vector<AARectangle> blocks);//custom mino
+	Mino(std::vector<AARectangle> blocks);//custom mino
 	void Init(MINO_TYPE minoType, Vec2D spawnCoordinates);
 	void Update(uint32_t dt);
 	void Draw(Screen& screen);
@@ -58,7 +58,7 @@ public:
 	inline MINO_TYPE& GetMinoType() {return mMinoType;}
 
 	void Rotate(MINO_TYPE minoType, std::vector<Mino> minos);
-	//std::vector<AARectangle> GetRotate(MINO_TYPE minoType, std::vector<Mino> minos);
+	std::vector<AARectangle> GetRotate(MINO_TYPE minoType);
 
 	void MoveLeft(TetrisLevelBoundary& levelBoundary, std::vector<Mino> minos);
 	void MoveRight(TetrisLevelBoundary& levelBoundary, std::vector<Mino> minos);

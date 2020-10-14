@@ -25,13 +25,13 @@ Mino::Mino():mColor(Color::Black()), mLocked(false), mMinoType(NONE_MINO), mRotS
 {
 
 }
-//Mino::Mino(std::vector<AARectangle> blocks): mLocked(false)
-//{
-//	for( AARectangle block : blocks)
-//	{
-//		mBlocks.push_back(block);
-//	}
-//}
+Mino::Mino(std::vector<AARectangle> blocks): mLocked(false), mMinoType(NONE_MINO), mRotState(0)
+{
+	for( AARectangle block : blocks)
+	{
+		mBlocks.push_back(block);
+	}
+}
 
 void Mino::Init(MINO_TYPE minoType, Vec2D spawnCoordinates)
 {
@@ -568,249 +568,249 @@ void Mino::Rotate(MINO_TYPE minoType, std::vector<Mino> minos)
 	IncrementRotState(1);
 }
 
-//std::vector<AARectangle> Mino::GetRotate(MINO_TYPE minoType, std::vector<Mino> minos)
-//{
-//	std::vector<AARectangle> resultBlocks;//ADD THE ROTATED BLOCKS HERE, THEN CHECK FOR COLLISION AT END
-//
-//	uint32_t rotation = GetRotState() % 4;
-//
-//	switch(minoType)
-//	{
-//		case NONE_MINO:
-//		{
-//			break;
-//		}
-//		case I_MINO:
-//		{
-//			if( rotation == 0 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//			else if( rotation == 1 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 2 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 3 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//
-//			break;
-//		}
-//		case J_MINO:
-//		{
-//			if( rotation == 0 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//			else if( rotation == 1 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 2 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 3 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//
-//			break;
-//		}
-//		case L_MINO:
-//		{
-//			if( rotation == 0 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//			else if( rotation == 1 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 2 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 3 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//
-//			break;
-//		}
-//		case O_MINO:
-//		{
-//			//O block does not rotate
-//			resultBlocks.push_back( GetBlock(0) );
-//			resultBlocks.push_back( GetBlock(1) );
-//			resultBlocks.push_back( GetBlock(2) );
-//			resultBlocks.push_back( GetBlock(3) );
-//
-//			break;
-//		}
-//		case S_MINO:
-//		{
-//			if( rotation == 0 )
-//			{
-//				resultBlocks.push_back( GetBlock(0) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//			else if( rotation == 1 )
-//			{
-//				resultBlocks.push_back( GetBlock(0) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 2 )
-//			{
-//				resultBlocks.push_back( GetBlock(0) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 3 )
-//			{
-//				resultBlocks.push_back( GetBlock(0) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//
-//			break;
-//		}
-//		case T_MINO:
-//		{
-//			if( rotation == 0 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//			else if( rotation == 1 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 2 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 3 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(1) );
-//				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//
-//			break;
-//		}
-//		case Z_MINO:
-//		{
-//			if( rotation == 0 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(2) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//			else if( rotation == 1 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(2) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 2 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(2) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//
-//			}
-//			else if( rotation == 3 )
-//			{
-//				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//				resultBlocks.push_back( GetBlock(2) );
-//				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
-//			}
-//
-//			break;
-//		}
-//	}
-//
-//	return resultBlocks;//Don't change anything just return the nextRotated state
-//}
+std::vector<AARectangle> Mino::GetRotate(MINO_TYPE minoType)
+{
+	std::vector<AARectangle> resultBlocks;//ADD THE ROTATED BLOCKS HERE, THEN CHECK FOR COLLISION AT END
+
+	uint32_t rotation = GetRotState() % 4;
+
+	switch(minoType)
+	{
+		case NONE_MINO:
+		{
+			break;
+		}
+		case I_MINO:
+		{
+			if( rotation == 0 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+			else if( rotation == 1 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 2 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 3 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+
+			break;
+		}
+		case J_MINO:
+		{
+			if( rotation == 0 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+			else if( rotation == 1 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 2 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 3 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+
+			break;
+		}
+		case L_MINO:
+		{
+			if( rotation == 0 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+			else if( rotation == 1 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 2 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 3 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+
+			break;
+		}
+		case O_MINO:
+		{
+			//O block does not rotate
+			resultBlocks.push_back( GetBlock(0) );
+			resultBlocks.push_back( GetBlock(1) );
+			resultBlocks.push_back( GetBlock(2) );
+			resultBlocks.push_back( GetBlock(3) );
+
+			break;
+		}
+		case S_MINO:
+		{
+			if( rotation == 0 )
+			{
+				resultBlocks.push_back( GetBlock(0) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+			else if( rotation == 1 )
+			{
+				resultBlocks.push_back( GetBlock(0) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 2 )
+			{
+				resultBlocks.push_back( GetBlock(0) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 3 )
+			{
+				resultBlocks.push_back( GetBlock(0) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+
+			break;
+		}
+		case T_MINO:
+		{
+			if( rotation == 0 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+			else if( rotation == 1 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 2 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 3 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(1) );
+				resultBlocks.push_back( AARectangle(GetBlock(2).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+
+			break;
+		}
+		case Z_MINO:
+		{
+			if( rotation == 0 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(2) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+			else if( rotation == 1 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() + BLOCK_DOWN + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() + BLOCK_DOWN - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(2) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 2 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_LEFT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_LEFT - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(2) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+
+			}
+			else if( rotation == 3 )
+			{
+				resultBlocks.push_back( AARectangle(GetBlock(0).GetTopLeftPoint() - BLOCK_UP - BLOCK_UP, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( AARectangle(GetBlock(1).GetTopLeftPoint() - BLOCK_UP + BLOCK_RIGHT, BLOCK_WIDTH, BLOCK_HEIGHT) );
+				resultBlocks.push_back( GetBlock(2) );
+				resultBlocks.push_back( AARectangle(GetBlock(3).GetTopLeftPoint() + BLOCK_RIGHT + BLOCK_DOWN, BLOCK_WIDTH, BLOCK_HEIGHT) );
+			}
+
+			break;
+		}
+	}
+
+	return resultBlocks;//Don't change anything just return the nextRotated state
+}
 
 bool Mino::CheckCollision(ICollidable& icollidable)
 {
 	return icollidable.CheckCollision(*this);
 }
 
-bool Mino::CheckCollision(Mino& other, EdgeType edge)//THIS IS ONLY CHECKING FOR THE BOTTOM BOUNDARYEDGE
+bool Mino::CheckCollision(Mino& other, EdgeType edge)
 {
 	for( AARectangle block : mBlocks )
 	{
@@ -830,7 +830,23 @@ bool Mino::CheckCollision(Mino& other, EdgeType edge)//THIS IS ONLY CHECKING FOR
 
 bool Mino::CheckCollision(TetrisLevelBoundary& other, EdgeType edge)
 {
-	if( edge == BOTTOM_EDGE )
+	if( edge == NUM_EDGES )
+	{
+		AARectangle boundary = other.GetLevelBoundary();
+
+		for( AARectangle block : mBlocks )
+		{
+			if( block.GetTopLeftPoint().GetX() < boundary.GetTopLeftPoint().GetX() ||
+				block.GetBottomRightPoint().GetX() > boundary.GetBottomRightPoint().GetX() ||
+				block.GetTopLeftPoint().GetY() < boundary.GetTopLeftPoint().GetY() ||
+				block.GetBottomRightPoint().GetY() > boundary.GetBottomRightPoint().GetY() )
+			{
+				return true;
+			}
+		}
+	}
+
+	else if( edge == BOTTOM_EDGE )
 	{
 		for( AARectangle block : mBlocks )
 		{
@@ -840,6 +856,7 @@ bool Mino::CheckCollision(TetrisLevelBoundary& other, EdgeType edge)
 			}
 		}
 	}
+
 
 	return false;
 }

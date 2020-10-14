@@ -59,25 +59,25 @@
                                     									
                                     <listOptionValue builtIn="false" value="&quot;C:\\MinGW\\include\\SDL2&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\App&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Utils}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\Graphics&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Shapes}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\Scenes&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Scenes}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\Utils&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Input}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\Shapes&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Graphics}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\Input&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Games}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\Games&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Games/BreakOut}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\Games\\Tetris&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Games/Tetris}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\Games\\Breakout&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Assets}&quot;"/>
                                     									
-                                    <listOptionValue builtIn="false" value="&quot;C:\\Users\\Admin\\git\\Tetris\\ArcadeApp\\src\\Assets&quot;"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/App}&quot;"/>
                                     								
                                 </option>
                                 								

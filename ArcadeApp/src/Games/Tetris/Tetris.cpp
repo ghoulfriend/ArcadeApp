@@ -54,11 +54,13 @@ void Tetris::Init(GameController& controller)
 
 					if( ! currentMino.IsLocked() )//cannot rotate once locked
 					{
+						std::vector<AARectangle> testBlocks = currentMino.GetRotate(currentMino.GetMinoType());
+						Mino testMino = {testBlocks};
 
-						//if( ! currentMino.CheckCollision(mLevelBoundary, BOTTOM_EDGE) )
-						//{
+						if( ! testMino.CheckCollision(mLevelBoundary, NUM_EDGES) )
+						{
 							currentMino.Rotate(currentMino.GetMinoType(), mMinos);
-						//}
+						}
 					}
 				}
 			};
@@ -122,6 +124,8 @@ void Tetris::Init(GameController& controller)
 
 void Tetris::Update(uint32_t dt)
 {
+
+	std::cout << "UPDATING UPDATING UPDATINUPIDATDSLKJDSLFKJASDLJASLDKJ" << std::endl;
 	static uint32_t timer = 0;
 	static uint32_t minoCnt = 0;
 	++timer;
