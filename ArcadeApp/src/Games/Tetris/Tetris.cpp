@@ -125,7 +125,6 @@ void Tetris::Init(GameController& controller)
 void Tetris::Update(uint32_t dt)
 {
 
-	std::cout << "UPDATING UPDATING UPDATINUPIDATDSLKJDSLFKJASDLJASLDKJ" << std::endl;
 	static uint32_t timer = 0;
 	static uint32_t minoCnt = 0;
 	++timer;
@@ -144,6 +143,7 @@ void Tetris::Update(uint32_t dt)
 
 				bool collisionDetected = false;
 
+				//AGAINST BOTTOM BOUNDARY EDGE FIRST..
 				collisionDetected = currentMino.CheckCollision(mLevelBoundary, BOTTOM_EDGE);
 
 				if( collisionDetected )
@@ -151,20 +151,23 @@ void Tetris::Update(uint32_t dt)
 					currentMino.ResolveCollision(mLevelBoundary);
 				}
 
-				for(uint32_t i = 0; i < mMinos.size() - 1; ++i)//AGAINST ALL OTHER TETROMINOS (EXCEPT SELF)
+				if( ! collisionDetected )//IF NOT ON BOTTOM BOUNDARY EDGE, CHECK AGAINST OTHER MINOS
 				{
-					collisionDetected = currentMino.CheckCollision(mMinos[i], BOTTOM_EDGE);
-
-					if( collisionDetected )
+					for(uint32_t i = 0; i < mMinos.size() - 1; ++i)//AGAINST ALL OTHER TETROMINOS (EXCEPT SELF)
 					{
-						currentMino.ResolveCollision(mMinos[i] );
-						break;
+						collisionDetected = currentMino.CheckCollision(mMinos[i], BOTTOM_EDGE);
+
+						if( collisionDetected )
+						{
+							currentMino.ResolveCollision(mMinos[i] );
+							break;
+						}
 					}
-				}
-				//UPDATE THE CURRENT TETROMINO.
-				if( ! collisionDetected )
-				{
-					currentMino.Update(dt);
+					//UPDATE THE CURRENT TETROMINO IF NO COLLISION WAS DETECTED
+					if( ! collisionDetected )
+					{
+						currentMino.Update(dt);
+					}
 				}
 
 			}

@@ -35,7 +35,10 @@ static const uint32_t PLAYFIELD_WIDTH_BLOCKS = 10;
 static const uint32_t& BLOCK_WIDTH = SCREEN_WIDTH/PLAYFIELD_WIDTH_BLOCKS;
 static const uint32_t& BLOCK_HEIGHT = SCREEN_HEIGHT/PLAYFIELD_HEIGHT_BLOCKS;
 
-static const Vec2D INITIAL_BLOCK_POS = {BLOCK_WIDTH*5.0f, BLOCK_HEIGHT*2.0f};//5 blocks over 2 blocks down
+static const float xScreenDiff = SCREEN_WIDTH - (SCREEN_WIDTH/PLAYFIELD_WIDTH_BLOCKS) * PLAYFIELD_WIDTH_BLOCKS;
+static const float yScreenDiff = SCREEN_HEIGHT - (SCREEN_HEIGHT/PLAYFIELD_HEIGHT_BLOCKS) * PLAYFIELD_HEIGHT_BLOCKS;
+
+static const Vec2D INITIAL_BLOCK_POS = {xScreenDiff / 2 + BLOCK_WIDTH*5.0f, yScreenDiff / 2 + BLOCK_HEIGHT*2.0f};//5 blocks over 2 blocks down
 
 const Vec2D BLOCK_DOWN = {0, BLOCK_HEIGHT*1.0f};
 const Vec2D BLOCK_UP = {0, BLOCK_HEIGHT*1.0f};

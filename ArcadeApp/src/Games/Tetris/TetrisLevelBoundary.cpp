@@ -11,7 +11,12 @@
 
 void TetrisLevelBoundary::Init()
 {
-	mLevelBoundary = AARectangle {Vec2D(0,0), App::Singleton().Width(), App::Singleton().Height()};
+	//BOUNDARY IS 10x20 BLOCKS
+	float yDiff = App::Singleton().Height() - (App::Singleton().Height() / 20) * 20;
+	float xDiff = App::Singleton().Width() - (App::Singleton().Width() / 10) * 10;
+	std::cout << "xdiff = " << xDiff << "\nyDiff = " << yDiff << std::endl;
+	//DIVIDE BY EA DIFF BY 2 TO CENTER THE BOUNDARY
+	mLevelBoundary = AARectangle {Vec2D(xDiff / 2, yDiff / 2), App::Singleton().Width() - xDiff, App::Singleton().Height() - yDiff};
 }
 void TetrisLevelBoundary::Draw(Screen& screen)
 {
